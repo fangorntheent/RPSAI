@@ -12,5 +12,6 @@ public class PlayRPS {
         System.out.println(algGeneral.algResults);
         System.out.println(algOne.getAlgOne(algGeneral));
         System.out.println(algGeneral.algResults);
+        System.out.println("hi");
     }
 }
