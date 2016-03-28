@@ -14,6 +14,11 @@ public class WinningPlay {
     }
 
     public WinningPlay(int player) {
+
+        getWinningPlay(player);
+    }
+
+    public void getWinningPlay(int player) {
         if (player == 0) {
             winningPlay = 1;
             losingPlay = 2;
