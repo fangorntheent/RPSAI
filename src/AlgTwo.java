@@ -25,7 +25,7 @@ public class AlgTwo {
     public ArrayList winHistory;
 
     // Allows use of master history list
-    // private AlgGeneral algGeneral = new AlgGeneral();
+    // private AlgGeneral algGeneral = new AlgGeneral(); 
 
     // Constructor
     public AlgTwo() {
