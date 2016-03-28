@@ -3,6 +3,11 @@ import java.util.Random;
 
 /**
  * Created by Gus Lipkin on 3/28/2016.
+ *
+ * ALGORITHM PURPOSE
+ *  Seed the most used throw by player and return the winning play
+ * ALGORITHM SUMMARY
+ *  See purpose
  */
 public class AlgThree {
 
