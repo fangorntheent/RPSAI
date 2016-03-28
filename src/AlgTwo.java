@@ -19,13 +19,13 @@ public class AlgTwo {
     public int weight;
     // How many times in a row player has repeated a move
     public int repeat;
-    // History of Alg's throws
+    // History of Alg's throws 
     public ArrayList history;
     // History of Alg's success or lack thereof
     public ArrayList winHistory;
 
     // Allows use of master history list
-    // private AlgGeneral algGeneral = new AlgGeneral(); 
+    // private AlgGeneral algGeneral = new AlgGeneral();
 
     // Constructor
     public AlgTwo() {
