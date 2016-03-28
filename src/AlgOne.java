@@ -24,6 +24,7 @@ public class AlgOne {
 
     // Constructor
     public AlgOne() {
+
         total = 0;
         weight = 1;
         history = new ArrayList<Integer>();

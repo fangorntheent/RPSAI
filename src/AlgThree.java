@@ -26,6 +26,7 @@ public class AlgThree {
 
     // Constructor
     public AlgThree() {
+
         total = 0;
         weight = 1;
         history = new ArrayList<Integer>();
@@ -35,6 +36,7 @@ public class AlgThree {
     // Match < 2
     // Add and return Alg's throw
     public int getAlgThree(AlgGeneral algGeneral) {
+
         algGeneral.algResults.set(2, new Random().nextInt(2));
         history.add(algGeneral.algResults.get(2));
         return (Integer)(history.get(history.size() - 1));
@@ -44,17 +46,15 @@ public class AlgThree {
     public int getAlgThree(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         // Needs extra time to kick in but must maintain same standards
-        if (playerGeneral.history.size() < 4) {
+        if (playerGeneral.history.size() < 4)
             algGeneral.algResults.set(2, getAlgThree(algGeneral));
-        }
-
-
 
         history.add(algGeneral.algResults.get(2));
         return (Integer)(history.get(history.size() - 1));
     }
 
     public void getThrowCount(int range, PlayerGeneral playerGeneral) {
+
         for (int i = 0; i <= range; i++) {
             if ((Integer)(playerGeneral.history.get(i)) == 0)
                 r++;
@@ -100,5 +100,45 @@ public class AlgThree {
 
         history.add(winningPlay.winningPlay);
         return (Integer)(history.get(history.size() - 1));
+    }
+
+    // Returns total
+    public int getTotal() {
+        return total;
+    }
+
+    // Returns weight
+    public int getWeight() {
+        return weight;
+    }
+
+    // Returns history
+    public ArrayList<Integer> getHistory() {
+        return history;
+    }
+
+    // Returns winHistory
+    public ArrayList<Integer> getWinHistory() {
+        return winHistory;
+    }
+
+    // Sets total to default
+    public void setTotal() {
+        total = 0;
+    }
+
+    // Sets total to value
+    public void setTotal(int value) {
+        total = value;
+    }
+
+    // Sets weight to default
+    public void setWeight() {
+        weight = 0;
+    }
+
+    // Sets weight to value
+    public void setWeight(int value) {
+        weight = value;
     }
 }
