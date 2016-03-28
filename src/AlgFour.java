@@ -34,7 +34,7 @@ public class AlgFour {
     // Match < 2
     // Add and return Alg's throw
     public int getAlgFour(AlgGeneral algGeneral) {
-
+ 
         algGeneral.algResults.set(3, new Random().nextInt(2));
         history.add(algGeneral.algResults.get(3));
         return (Integer)(history.get(history.size() - 1));
