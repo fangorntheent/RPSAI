@@ -24,9 +24,6 @@ public class AlgTwo {
     // History of Alg's success or lack thereof
     public ArrayList winHistory;
 
-    // Allows use of master history list
-    // private AlgGeneral algGeneral = new AlgGeneral();
-
     // Constructor
     public AlgTwo() {
         total = 0;
@@ -57,12 +54,10 @@ public class AlgTwo {
         WinChecker winCheckerPrevPrev = new WinChecker(playerPrevPrev, algPrevPrev);
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
-        if (playerPrev == playerPrevPrev) {
+        if (playerPrev == playerPrevPrev)
             repeat += 1;
-        }
-        else {
+        else
             repeat = 1;
-        }
 
         algGeneral.algResults.set(1, winningPlay.winningPlay);
         history.add(algGeneral.algResults.get(1));

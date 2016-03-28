@@ -22,9 +22,6 @@ public class AlgOne {
     // History of Alg's success or lack thereof
     public ArrayList winHistory;
 
-    // Allows use of master history list
-    // private AlgGeneral algGeneral = new AlgGeneral();
-
     // Constructor
     public AlgOne() {
         total = 0;
@@ -51,23 +48,17 @@ public class AlgOne {
         WinChecker winChecker = new WinChecker(playerPrev, algPrev);
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
-        if (winChecker.winnerText == "player") {
+        if (winChecker.winnerText == "player")
             algGeneral.algResults.set(0, algPrev);
-        }
-        else if (winChecker.winnerText == "ai") {
+        else if (winChecker.winnerText == "ai")
             algGeneral.algResults.set(0, playerPrev);
-        }
-        else if (winChecker.winnerText == "tie") {
-            if (playerPrev == 0) {
+        else if (winChecker.winnerText == "tie")
+            if (playerPrev == 0)
                 algGeneral.algResults.set(0, winningPlay.losingPlay);
-            }
-            else if (playerPrev == 1) {
+            else if (playerPrev == 1)
                 algGeneral.algResults.set(0, winningPlay.losingPlay);
-            }
-            else if (playerPrev == 2) {
+            else if (playerPrev == 2)
                 algGeneral.algResults.set(0, winningPlay.losingPlay);
-            }
-        }
 
         history.add(algGeneral.algResults.get(0));
         return (Integer)(history.get(history.size() - 1));
