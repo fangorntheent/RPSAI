@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Gus Lipkin on 3/27/2016.
@@ -10,7 +11,7 @@ public class AlgGeneral {
     public ArrayList algResults;
 
     public AlgGeneral() {
-        
+
         history = new ArrayList<Integer>();
         winHistory = new ArrayList<Integer>();
         algResults = new ArrayList<Integer>();
@@ -20,5 +21,10 @@ public class AlgGeneral {
             algResults.add(-1);
             x += 1;
         }
+    }
+
+    public void algChooser() {
+
+        history.add(history.get((Integer)(algResults.get(0))));
     }
 }
