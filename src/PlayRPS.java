@@ -13,5 +13,9 @@ public class PlayRPS {
         System.out.println(algOne.getAlgOne(algGeneral));
         System.out.println(algGeneral.algResults);
         System.out.println("hi");
+        String s = algGeneral.algResults.toString();
+        s = s.replaceAll(", ", "");
+        s = s.substring(1, s.length() - 1);
+        System.out.println(s);
     }
 }
