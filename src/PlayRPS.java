@@ -20,6 +20,7 @@ public class PlayRPS {
     }
 
     public static void main(String[] args) {
+        
         AlgGeneral algGeneral = new AlgGeneral();
         PlayerGeneral playerGeneral = new PlayerGeneral();
         AlgOne algOne = new AlgOne();
