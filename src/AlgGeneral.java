@@ -10,6 +10,7 @@ public class AlgGeneral {
     public ArrayList algResults;
 
     public AlgGeneral() {
+        
         history = new ArrayList<Integer>();
         winHistory = new ArrayList<Integer>();
         algResults = new ArrayList<Integer>();
