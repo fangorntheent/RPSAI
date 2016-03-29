@@ -3,15 +3,15 @@
  */
 public class Translator {
 
-    public int wordsToNum;
-    public String numToWords;
+    private int wordsToNum;
+    private String numToWords;
 
     public Translator() {
         wordsToNum = -1;
         numToWords = "Error";
     }
 
-    public Translator(String input) {
+    public int wordsToNum(String input) {
         switch (input) {
             case "r":
                 wordsToNum = 0;
@@ -44,9 +44,48 @@ public class Translator {
                 wordsToNum = -1;
                 break;
         }
+
+        return wordsToNum;
     }
 
-    public Translator(int input) {
+    public String wordsToNumString(String input) {
+        switch (input) {
+            case "r":
+                wordsToNum = 0;
+                break;
+            case "p":
+                wordsToNum = 1;
+                break;
+            case "s":
+                wordsToNum = 2;
+                break;
+            case "rock":
+                wordsToNum = 0;
+                break;
+            case "paper":
+                wordsToNum = 1;
+                break;
+            case "scissors":
+                wordsToNum = 2;
+                break;
+            case "Rock":
+                wordsToNum = 0;
+                break;
+            case "Paper":
+                wordsToNum = 1;
+                break;
+            case "Scissors":
+                wordsToNum = 2;
+                break;
+            default:
+                wordsToNum = -1;
+                break;
+        }
+
+        return ("" + wordsToNum);
+    }
+
+    public String numToWords(int input) {
         switch (input) {
             case 0:
                 numToWords = "Rock";
@@ -61,5 +100,7 @@ public class Translator {
                 numToWords = "Error";
                 break;
         }
+
+        return numToWords;
     }
 }
