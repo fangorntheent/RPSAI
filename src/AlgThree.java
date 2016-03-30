@@ -33,7 +33,6 @@ public class AlgThree {
         winHistory = new ArrayList<>();
     }
 
-    // Match < 2
     // Add and return Alg's throw
     public int getAlgThree(AlgGeneral algGeneral) {
 
@@ -48,6 +47,58 @@ public class AlgThree {
         // Needs extra time to kick in but must maintain same standards
         if (playerGeneral.history.size() < 4)
             algGeneral.algResults.set(2, getAlgThree(algGeneral));
+
+        // Code that needs to be converted from python
+        /**
+        def master_ai():
+        #manage alg 1
+            print('---START SELECTION PROCESS---')
+        alg_1_history.append(alg_1())
+        global alg_1_score
+        if round >= 3:
+            print("  ALG 1 selected " + str(num_to_words[alg_1_history[round]].lower()))
+          if check_winner(player_input,alg_1_history[round]) == 'player':
+              alg_1_score -= 1
+          if check_winner(player_input, alg_1_history[round]) == 'ai':
+              alg_1_score += 1
+          print("  ALG 1 score = " + str(alg_1_score))
+
+      #manage alg 2
+      alg_2_history.append(alg_2())
+      global alg_2_score
+      if round >= 4:
+          print("  ALG 2 selected " + str(num_to_words[alg_2_history[round]].lower()) + ' because your last three throws were:' + str(player_history[round - 3:round]))
+          if check_winner(player_input, alg_2_history[round]) == 'player':
+               alg_2_score -= 1
+           if check_winner(player_input, alg_2_history[round]) == 'ai':
+               alg_2_score += 1
+           print("  ALG 2 score = " + str(alg_2_score))
+
+       #manage alg 3
+      alg_3_history.append(alg_3())
+      global alg_3_score
+      if round >= 4:
+        print("  ALG 3 selected " + str(
+            num_to_words[alg_3_history[round]].lower()) + ' because your last three throws were:' + str(
+            player_history[round - 3:round]))
+        if check_winner(player_input, alg_3_history[round]) == 'player':
+            alg_3_score -= 1
+        if check_winner(player_input, alg_3_history[round]) == 'ai':
+            alg_3_score += 1
+        print("  ALG 3 score = " + str(alg_3_score))
+
+        print('---END SELECTION PROCESS---')
+       if alg_1_score >= alg_2_score and alg_1_score >= alg_3_score:
+         print('ALG 1 selected')
+          return alg_1_history[round]
+       if alg_2_score >= alg_3_score and alg_2_score >= alg_1_score:
+           print('ALG 2 selected')
+           return alg_2_history[round]
+        if alg_3_score >= alg_2_score and alg_3_score >= alg_1_score:
+           print('ALG 3 selected')
+          return alg_3_history[round]
+
+         */
 
         history.add(algGeneral.algResults.get(2));
         return (Integer)(history.get(history.size() - 1));
