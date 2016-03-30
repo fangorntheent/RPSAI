@@ -33,7 +33,6 @@ public class AlgTwo {
         winHistory = new ArrayList<>();
     }
 
-    // Match < 2
     // Add and return Alg's throw
     public int getAlgTwo(AlgGeneral algGeneral) {
 

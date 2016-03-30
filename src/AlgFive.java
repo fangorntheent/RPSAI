@@ -28,7 +28,6 @@ public class AlgFive {
         winHistory = new ArrayList<>();
     }
 
-    // Match < 2
     // Add and return Alg's throw
     public int getAlgFive(AlgGeneral algGeneral) {
 
