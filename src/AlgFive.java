@@ -24,8 +24,8 @@ public class AlgFive {
 
         total = 0;
         weight = 1;
-        history = new ArrayList<Integer>();
-        winHistory = new ArrayList<Integer>();
+        history = new ArrayList<>();
+        winHistory = new ArrayList<>();
     }
 
     // Match < 2
@@ -52,12 +52,12 @@ public class AlgFive {
         int option = 0;
         String pattern = "";
         String playerHistory = playerGeneral.history.toString().substring(1, playerGeneral.history.size() - 1).replaceAll(", ", "");
-        ArrayList indexOfPattern = new ArrayList<Integer>();
+        ArrayList indexOfPattern = new ArrayList<>();
 
         WinningPlay winningPlay = new WinningPlay();
 
         for (int i = 0; i < 4; i++)
-            pattern = pattern + (Integer)(playerGeneral.history.get(playerGeneral.history.size() - i - 1));
+            pattern = pattern + playerGeneral.history.get(playerGeneral.history.size() - i - 1);
 
         while (playerHistory.contains(pattern)) {
                 indexOfPattern.add(playerHistory.indexOf(pattern));

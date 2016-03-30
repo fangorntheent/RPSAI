@@ -29,8 +29,8 @@ public class AlgTwo {
         total = 0;
         weight = 1;
         repeat = 1;
-        history = new ArrayList<Integer>();
-        winHistory = new ArrayList<Integer>();
+        history = new ArrayList<>();
+        winHistory = new ArrayList<>();
     }
 
     // Match < 2

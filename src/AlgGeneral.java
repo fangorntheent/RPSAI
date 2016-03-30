@@ -12,9 +12,9 @@ public class AlgGeneral {
 
     public AlgGeneral() {
 
-        history = new ArrayList<Integer>();
-        winHistory = new ArrayList<Integer>();
-        algResults = new ArrayList<Integer>();
+        history = new ArrayList<>();
+        winHistory = new ArrayList<>();
+        algResults = new ArrayList<>();
 
         int x = 0;
         while (x < 5) {
