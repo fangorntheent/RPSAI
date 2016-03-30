@@ -40,7 +40,12 @@ public class AlgFive {
     // Add and return Alg's throw
     public int getAlgFive(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
-        int containsPattern = 1;
+        // Needs extra time to kick in but must maintain same standards
+        if (playerGeneral.history.size() < 4) {
+            algGeneral.algResults.set(4, getAlgFive(algGeneral));
+            return (Integer) (history.get(history.size() - 1));
+        }
+
         int r = 0;
         int p = 0;
         int s = 0;
@@ -50,10 +55,6 @@ public class AlgFive {
         ArrayList indexOfPattern = new ArrayList<Integer>();
 
         WinningPlay winningPlay = new WinningPlay();
-
-        // Needs extra time to kick in but must maintain same standards
-        if (playerGeneral.history.size() < 4)
-            algGeneral.algResults.set(4, getAlgFive(algGeneral));
 
         for (int i = 0; i < 4; i++)
             pattern = pattern + (Integer)(playerGeneral.history.get(playerGeneral.history.size() - i - 1));

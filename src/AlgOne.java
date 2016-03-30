@@ -43,6 +43,11 @@ public class AlgOne {
     // Add and return Alg's throw
     public int getAlgOne(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
+        if (playerGeneral.history.size() < 2) {
+            algGeneral.algResults.set(0, getAlgOne(algGeneral));
+            return (Integer) (history.get(history.size() - 1));
+        }
+
         int algPrev = (Integer)(algGeneral.history.get(algGeneral.history.size() - 1));
         int playerPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1));
 

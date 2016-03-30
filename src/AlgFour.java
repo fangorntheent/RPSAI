@@ -31,7 +31,6 @@ public class AlgFour {
         winHistory = new ArrayList<Integer>();
     }
 
-    // Match < 2
     // Add and return Alg's throw
     public int getAlgFour(AlgGeneral algGeneral) {
 
@@ -41,6 +40,11 @@ public class AlgFour {
     }
 
     public int getAlgFour(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
+
+        if (playerGeneral.history.size() < 2) {
+            algGeneral.algResults.set(3, getAlgFour(algGeneral));
+            return (Integer) (history.get(history.size() - 1));
+        }
 
         int playerPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 1));
         int playerPrevPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 2));
