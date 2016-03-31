@@ -1,3 +1,6 @@
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
@@ -35,19 +38,40 @@ public class PlayRPS {
     }
 
     private static void setWeight(ArrayList algs) {
-        int i = 0;
 
-        System.out.println(algs.get(i).getClass().);
+        for (int i = 0; i <= algs.size() - 1; i++) {
+            try {
+                Method method = algs.get(i).getClass().getDeclaredMethod("setWeight", new Class<?>[]{int.class});
+                Object setWeight = method.invoke(algs.get(i), (Integer)(2));
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            try {
+                Field field = algs.get(i).getClass().getDeclaredField("weight");
+                Object weight = field.get(algs.get(i));
+                System.out.println(weight);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
     public static void main(String[] args) {
 
         AlgGeneral algGeneral = new AlgGeneral();
         PlayerGeneral playerGeneral = new PlayerGeneral();
+
         AlgOne algOne = new AlgOne();
         AlgTwo algTwo = new AlgTwo();
+        AlgThree algThree = new AlgThree();
+        AlgFour algFour = new AlgFour();
+
         ArrayList algList = new ArrayList<>();
+
         algList.add(algOne);
         algList.add(algTwo);
+        algList.add(algThree);
+        algList.add(algFour);
+
         setWeight(algList);
 
         algGeneral.algResults.set(0, 1);
