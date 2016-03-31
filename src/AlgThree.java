@@ -93,7 +93,7 @@ public class AlgThree {
 
     // Sets weight to default
     public void setWeight() {
-        weight = 0;
+        weight = 1;
     }
 
     // Sets weight to value
