@@ -41,16 +41,13 @@ public class PlayRPS {
 
         for (int i = 0; i <= algs.size() - 1; i++) {
             try {
-                Method method = algs.get(i).getClass().getDeclaredMethod("setWeight", new Class<?>[]{int.class});
-                Object setWeight = method.invoke(algs.get(i), (Integer)(2));
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-            try {
                 Field field = algs.get(i).getClass().getDeclaredField("weight");
+                Method method = algs.get(i).getClass().getDeclaredMethod("setWeight", new Class<?>[]{int.class});
                 Object weight = field.get(algs.get(i));
+                Object setWeight = method.invoke(algs.get(i), (Integer)(2) + (Integer)(weight));
+                weight = field.get(algs.get(i));
                 System.out.println(weight);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
         }
