@@ -11,6 +11,8 @@ import java.util.Random;
  */
 public class AlgFour {
 
+    // Alg number
+    public int algNumber;
     // How valuable Alg results are
     public int total;
     // How often Alg is correct
@@ -24,6 +26,8 @@ public class AlgFour {
 
     // Constructor
     public AlgFour() {
+
+        algNumber = 3;
         total = 0;
         weight = 1;
         repeat = 1;
@@ -34,15 +38,15 @@ public class AlgFour {
     // Add and return Alg's throw
     public int getAlgFour(AlgGeneral algGeneral) {
 
-        algGeneral.algResults.set(3, new Random().nextInt(2));
-        history.add(algGeneral.algResults.get(3));
+        algGeneral.algResults.set(algNumber, new Random().nextInt(2));
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 
     public int getAlgFour(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         if (playerGeneral.history.size() < 2) {
-            algGeneral.algResults.set(3, getAlgFour(algGeneral));
+            algGeneral.algResults.set(algNumber, getAlgFour(algGeneral));
             return (Integer) (history.get(history.size() - 1));
         }
 
@@ -54,7 +58,7 @@ public class AlgFour {
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
         if (winPrev == 0) {
-            algGeneral.algResults.set(3, winningPlay.winningPlay);
+            algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
 
             if ((playerPrev == playerPrevPrev) && (winPrevPrev == 0))
                 repeat += 3;
@@ -64,7 +68,7 @@ public class AlgFour {
         else
             repeat -= 1;
 
-        history.add(algGeneral.algResults.get(3));
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 }

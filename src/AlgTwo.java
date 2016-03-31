@@ -13,6 +13,8 @@ import java.util.Random;
  */
 public class AlgTwo { 
 
+    // Alg number
+    public int algNumber;
     // How valuable Alg results are
     public int total;
     // How often Alg is correct
@@ -26,6 +28,8 @@ public class AlgTwo {
 
     // Constructor
     public AlgTwo() {
+
+        algNumber = 1;
         total = 0;
         weight = 1;
         repeat = 1;
@@ -36,8 +40,8 @@ public class AlgTwo {
     // Add and return Alg's throw
     public int getAlgTwo(AlgGeneral algGeneral) {
 
-        algGeneral.algResults.set(1, new Random().nextInt(2));
-        history.add(algGeneral.algResults.get(1));
+        algGeneral.algResults.set(algNumber, new Random().nextInt(2));
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 
@@ -45,7 +49,7 @@ public class AlgTwo {
     public int getAlgTwo(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         if (playerGeneral.history.size() < 2) {
-            algGeneral.algResults.set(1, getAlgTwo(algGeneral));
+            algGeneral.algResults.set(algNumber, getAlgTwo(algGeneral));
             return (Integer) (history.get(history.size() - 1));
         }
 
@@ -63,8 +67,8 @@ public class AlgTwo {
         else
             repeat = 1;
 
-        algGeneral.algResults.set(1, winningPlay.winningPlay);
-        history.add(algGeneral.algResults.get(1));
+        algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 

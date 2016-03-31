@@ -6,6 +6,8 @@ import java.util.Random;
  */
 public class AlgFive {
 
+    // Alg number
+    public int algNumber;
     // How valuable Alg results are
     public int total;
     // How often Alg is correct
@@ -22,6 +24,7 @@ public class AlgFive {
     // Constructor
     public AlgFive() {
 
+        algNumber = 4;
         total = 0;
         weight = 1;
         history = new ArrayList<>();
@@ -31,8 +34,8 @@ public class AlgFive {
     // Add and return Alg's throw
     public int getAlgFive(AlgGeneral algGeneral) {
 
-        algGeneral.algResults.set(2, new Random().nextInt(2));
-        history.add(algGeneral.algResults.get(2));
+        algGeneral.algResults.set(algNumber, new Random().nextInt(2));
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 
@@ -41,7 +44,7 @@ public class AlgFive {
 
         // Needs extra time to kick in but must maintain same standards
         if (playerGeneral.history.size() < 4) {
-            algGeneral.algResults.set(4, getAlgFive(algGeneral));
+            algGeneral.algResults.set(algNumber, getAlgFive(algGeneral));
             return (Integer) (history.get(history.size() - 1));
         }
 
@@ -75,16 +78,9 @@ public class AlgFive {
                     s++;
         }
 
-        if ((r > p) && (r > s))
-            winningPlay.getWinningPlay(r);
-        else if ((p > r) && (p > s))
-            winningPlay.getWinningPlay(p);
-        else if ((s > r) && (s > p))
-            winningPlay.getWinningPlay(s);
-        else
-            winningPlay.getWinningPlay(new Random().nextInt(2));
+        winningPlay.setWinningPlay(algGeneral.winningPlaySeeder(r, p, s));
 
-        algGeneral.algResults.set(4, winningPlay.winningPlay);
+        algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
         history.add(winningPlay.winningPlay);
         return (Integer)(history.get(history.size() - 1));
     }

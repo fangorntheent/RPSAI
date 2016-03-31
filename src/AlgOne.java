@@ -13,6 +13,8 @@ import java.util.Random;
  */
 public class AlgOne {
 
+    // Alg number
+    public int algNumber;
     // How valuable Alg results are
     public int total;
     // How often Alg is correct
@@ -25,6 +27,7 @@ public class AlgOne {
     // Constructor
     public AlgOne() {
 
+        algNumber = 0;
         total = 0;
         weight = 1;
         history = new ArrayList<>();
@@ -34,8 +37,8 @@ public class AlgOne {
     // Add and return Alg's throw
     public int getAlgOne(AlgGeneral algGeneral) {
 
-        algGeneral.algResults.set(0, new Random().nextInt(2));
-        history.add(algGeneral.algResults.get(0));
+        algGeneral.algResults.set(algNumber, new Random().nextInt(2));
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 
@@ -43,7 +46,7 @@ public class AlgOne {
     public int getAlgOne(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         if (playerGeneral.history.size() < 2) {
-            algGeneral.algResults.set(0, getAlgOne(algGeneral));
+            algGeneral.algResults.set(algNumber, getAlgOne(algGeneral));
             return (Integer) (history.get(history.size() - 1));
         }
 
@@ -54,18 +57,18 @@ public class AlgOne {
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
         if (winChecker.winnerText == "player")
-            algGeneral.algResults.set(0, algPrev);
-        else if (winChecker.winnerText == "ai")
-            algGeneral.algResults.set(0, playerPrev);
-        else if (winChecker.winnerText == "tie")
+            algGeneral.algResults.set(algNumber, algPrev);
+        else if (winChecker.winnerText.equals("ai"))
+            algGeneral.algResults.set(algNumber, playerPrev);
+        else if (winChecker.winnerText.equals("tie"))
             if (playerPrev == 0)
-                algGeneral.algResults.set(0, winningPlay.losingPlay);
+                algGeneral.algResults.set(algNumber, winningPlay.losingPlay);
             else if (playerPrev == 1)
-                algGeneral.algResults.set(0, winningPlay.losingPlay);
+                algGeneral.algResults.set(algNumber, winningPlay.losingPlay);
             else if (playerPrev == 2)
-                algGeneral.algResults.set(0, winningPlay.losingPlay);
+                algGeneral.algResults.set(algNumber, winningPlay.losingPlay);
 
-        history.add(algGeneral.algResults.get(0));
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 

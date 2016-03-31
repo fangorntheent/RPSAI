@@ -11,6 +11,8 @@ import java.util.Random;
  */
 public class AlgThree {
 
+    // Alg number
+    public int algNumber;
     // How valuable Alg results are
     public int total;
     // How often Alg is correct
@@ -27,6 +29,7 @@ public class AlgThree {
     // Constructor
     public AlgThree() {
 
+        algNumber = 2;
         total = 0;
         weight = 1;
         history = new ArrayList<>();
@@ -36,8 +39,8 @@ public class AlgThree {
     // Add and return Alg's throw
     public int getAlgThree(AlgGeneral algGeneral) {
 
-        algGeneral.algResults.set(2, new Random().nextInt(2));
-        history.add(algGeneral.algResults.get(2));
+        algGeneral.algResults.set(algNumber, new Random().nextInt(2));
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 
@@ -45,66 +48,20 @@ public class AlgThree {
     public int getAlgThree(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         // Needs extra time to kick in but must maintain same standards
-        if (playerGeneral.history.size() < 4)
-            algGeneral.algResults.set(2, getAlgThree(algGeneral));
+        if (playerGeneral.history.size() < 3)
+            algGeneral.algResults.set(algNumber, getAlgThree(algGeneral));
 
-        // Code that needs to be converted from python
-        /**
-        def master_ai():
-        #manage alg 1
-            print('---START SELECTION PROCESS---')
-        alg_1_history.append(alg_1())
-        global alg_1_score
-        if round >= 3:
-            print("  ALG 1 selected " + str(num_to_words[alg_1_history[round]].lower()))
-          if check_winner(player_input,alg_1_history[round]) == 'player':
-              alg_1_score -= 1
-          if check_winner(player_input, alg_1_history[round]) == 'ai':
-              alg_1_score += 1
-          print("  ALG 1 score = " + str(alg_1_score))
+        WinningPlay winningPlay = new WinningPlay();
 
-      #manage alg 2
-      alg_2_history.append(alg_2())
-      global alg_2_score
-      if round >= 4:
-          print("  ALG 2 selected " + str(num_to_words[alg_2_history[round]].lower()) + ' because your last three throws were:' + str(player_history[round - 3:round]))
-          if check_winner(player_input, alg_2_history[round]) == 'player':
-               alg_2_score -= 1
-           if check_winner(player_input, alg_2_history[round]) == 'ai':
-               alg_2_score += 1
-           print("  ALG 2 score = " + str(alg_2_score))
+        getThrowCount(2, playerGeneral);
+        winningPlay.setWinningPlay(algGeneral.winningPlaySeeder(r, p, s));
 
-       #manage alg 3
-      alg_3_history.append(alg_3())
-      global alg_3_score
-      if round >= 4:
-        print("  ALG 3 selected " + str(
-            num_to_words[alg_3_history[round]].lower()) + ' because your last three throws were:' + str(
-            player_history[round - 3:round]))
-        if check_winner(player_input, alg_3_history[round]) == 'player':
-            alg_3_score -= 1
-        if check_winner(player_input, alg_3_history[round]) == 'ai':
-            alg_3_score += 1
-        print("  ALG 3 score = " + str(alg_3_score))
-
-        print('---END SELECTION PROCESS---')
-       if alg_1_score >= alg_2_score and alg_1_score >= alg_3_score:
-         print('ALG 1 selected')
-          return alg_1_history[round]
-       if alg_2_score >= alg_3_score and alg_2_score >= alg_1_score:
-           print('ALG 2 selected')
-           return alg_2_history[round]
-        if alg_3_score >= alg_2_score and alg_3_score >= alg_1_score:
-           print('ALG 3 selected')
-          return alg_3_history[round]
-
-         */
-
-        history.add(algGeneral.algResults.get(2));
+        algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
+        history.add(winningPlay.winningPlay);
         return (Integer)(history.get(history.size() - 1));
     }
 
-    public void getThrowCount(int range, PlayerGeneral playerGeneral) {
+    private void getThrowCount(int range, PlayerGeneral playerGeneral) {
 
         for (int i = 0; i <= range; i++) {
             if ((Integer)(playerGeneral.history.get(i)) == 0)
@@ -115,42 +72,6 @@ public class AlgThree {
                 s++;
         }
 
-    }
-
-    public int beatsMostUsed(int range, PlayerGeneral playerGeneral) {
-
-        WinningPlay winningPlay = new WinningPlay();
-        getThrowCount(range, playerGeneral);
-
-        if ((r > p) && (r > s))
-            winningPlay.getWinningPlay(r);
-        else if ((p > r) && (p > s))
-            winningPlay.getWinningPlay(p);
-        else if ((s > r) && (s > p))
-            winningPlay.getWinningPlay(s);
-        else
-            winningPlay.getWinningPlay(new Random().nextInt(2));
-
-        history.add(winningPlay.winningPlay);
-        return (Integer)(history.get(history.size() - 1));
-    }
-
-    public int beatsLeastUsed(int range, PlayerGeneral playerGeneral) {
-
-        WinningPlay winningPlay = new WinningPlay();
-        getThrowCount(range, playerGeneral);
-
-        if ((r < p) && (r < s))
-            winningPlay.getWinningPlay(r);
-        else if ((p < r) && (p < s))
-            winningPlay.getWinningPlay(p);
-        else if ((s < r) && (s < p))
-            winningPlay.getWinningPlay(s);
-        else
-            winningPlay.getWinningPlay(new Random().nextInt(2));
-
-        history.add(winningPlay.winningPlay);
-        return (Integer)(history.get(history.size() - 1));
     }
 
     // Returns total
