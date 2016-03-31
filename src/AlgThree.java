@@ -54,7 +54,7 @@ public class AlgThree {
         WinningPlay winningPlay = new WinningPlay();
 
         playerGeneral.setThrowCount(2);
-        winningPlay.setWinningPlay(algGeneral.winningPlaySeeder(playerGeneral.rCount, playerGeneral.pCount, playerGeneral.sCount));
+        winningPlay.setWinningPlay(algGeneral.losingPlaySeeder(playerGeneral.rCount, playerGeneral.pCount, playerGeneral.sCount));
 
         algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
         history.add(winningPlay.winningPlay);
