@@ -2,14 +2,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by Gus Lipkin on 3/28/2016.
- *
- * ALGORITHM PURPOSE
- *  Seed the most used throw by player and return the winning play
- * ALGORITHM SUMMARY
- *  See purpose
+ * Created by Gus Lipkin on 3/30/2016.
  */
-public class AlgThree {
+public class AlgSeven {
 
     // Alg number
     public int algNumber;
@@ -27,9 +22,9 @@ public class AlgThree {
     private int s = 0;
 
     // Constructor
-    public AlgThree() {
+    public AlgSeven() {
 
-        algNumber = 2;
+        algNumber = 6;
         total = 0;
         weight = 1;
         history = new ArrayList<>();
@@ -37,7 +32,7 @@ public class AlgThree {
     }
 
     // Add and return Alg's throw
-    public int getAlgThree(AlgGeneral algGeneral) {
+    public int getAlgSeven(AlgGeneral algGeneral) {
 
         algGeneral.algResults.set(algNumber, new Random().nextInt(2));
         history.add(algGeneral.algResults.get(algNumber));
@@ -45,19 +40,19 @@ public class AlgThree {
     }
 
     // Add and return Alg's throw
-    public int getAlgThree(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
+    public int getAlgSeven(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         // Needs extra time to kick in but must maintain same standards
         if (playerGeneral.history.size() < 3)
-            algGeneral.algResults.set(algNumber, getAlgThree(algGeneral));
+            algGeneral.algResults.set(algNumber, getAlgSeven(algGeneral));
 
         WinningPlay winningPlay = new WinningPlay();
 
-        playerGeneral.setThrowCount(2);
+        playerGeneral.setThrowCount(playerGeneral.history.size() - 1);
         winningPlay.setWinningPlay(algGeneral.winningPlaySeeder(playerGeneral.rCount, playerGeneral.pCount, playerGeneral.sCount));
 
         algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
-        history.add(winningPlay.winningPlay);
+        history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
 
