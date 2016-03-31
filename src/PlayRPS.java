@@ -37,11 +37,7 @@ public class PlayRPS {
     private static void setWeight(ArrayList algs) {
         int i = 0;
 
-        try {
-            System.out.println(algs.get(i).getClass().getDeclaredMethod("setWeight", algs.get(i).getClass(), i));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        System.out.println(algs.get(i).getClass().);
     }
     public static void main(String[] args) {
 
