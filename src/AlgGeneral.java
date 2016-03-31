@@ -6,7 +6,7 @@ import java.util.Random;
  */
 public class AlgGeneral {
 
-    public int totalAlgNumber = 6;
+    public int totalAlgNumber = 7;
 
     public ArrayList history;
     public ArrayList winHistory;
@@ -20,7 +20,7 @@ public class AlgGeneral {
 
         int x = 0;
         while (x < totalAlgNumber) {
-            algResults.add(-1);
+            algResults.add(null);
             x += 1;
         }
     }
