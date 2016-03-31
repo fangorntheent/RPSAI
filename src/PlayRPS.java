@@ -25,16 +25,7 @@ public class PlayRPS {
     }
 
     private static int combineAlgs(ArrayList algs) {
-        //System.out.println(algs.get(0).getClass().getDeclaredMethods()[0]);
-        //System.out.println(algs.get(0).getClass().getDeclaredMethod("getTotal"));
-        System.out.println(algs.get(0).getClass().getDeclaredFields()[0]);
-        try {
-            System.out.println(algs.get(0).getClass().getDeclaredField("algNumber").getInt(algs.get(0)));
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        System.out.println("oops");
-        return 0;
+        return -1;
     }
 
     private static void setWeight(ArrayList algs) {
@@ -44,7 +35,7 @@ public class PlayRPS {
                 Field field = algs.get(i).getClass().getDeclaredField("weight");
                 Method method = algs.get(i).getClass().getDeclaredMethod("setWeight", new Class<?>[]{int.class});
                 Object weight = field.get(algs.get(i));
-                Object setWeight = method.invoke(algs.get(i), (Integer)(2) + (Integer)(weight));
+                method.invoke(algs.get(i), (Integer)(1) + (Integer)(weight));
                 weight = field.get(algs.get(i));
                 System.out.println(weight);
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
@@ -61,6 +52,9 @@ public class PlayRPS {
         AlgTwo algTwo = new AlgTwo();
         AlgThree algThree = new AlgThree();
         AlgFour algFour = new AlgFour();
+        AlgFive algFive = new AlgFive();
+        AlgSix algSix = new AlgSix();
+        AlgSeven algSeven = new AlgSeven();
 
         ArrayList algList = new ArrayList<>();
 
@@ -68,10 +62,13 @@ public class PlayRPS {
         algList.add(algTwo);
         algList.add(algThree);
         algList.add(algFour);
+        algList.add(algFive);
+        algList.add(algSix);
+        algList.add(algSeven);
 
         setWeight(algList);
 
-        algGeneral.algResults.set(0, 1);
+        algGeneral.algResults.set(0, algGeneral.totalAlgNumber + 1);
         String s = algGeneral.algResults.toString();
         s = s.replaceAll(", ", "");
         s = s.substring(1, s.length() - 1);
