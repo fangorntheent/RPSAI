@@ -15,10 +15,10 @@ public class WinningPlay {
 
     public WinningPlay(int player) {
 
-        getWinningPlay(player);
+        setWinningPlay(player);
     }
 
-    public void getWinningPlay(int player) {
+    public void setWinningPlay(int player) {
         if (player == 0) {
             winningPlay = 1;
             losingPlay = 2;
