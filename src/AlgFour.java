@@ -71,4 +71,44 @@ public class AlgFour {
         history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
+
+    // Returns total
+    public int getTotal() {
+        return total;
+    }
+
+    // Returns weight
+    public int getWeight() {
+        return weight;
+    }
+
+    // Returns history
+    public ArrayList<Integer> getHistory() {
+        return history;
+    }
+
+    // Returns winHistory
+    public ArrayList<Integer> getWinHistory() {
+        return winHistory;
+    }
+
+    // Sets total to default
+    public void setTotal() {
+        total = 0;
+    }
+
+    // Sets total to value
+    public void setTotal(int value) {
+        total = value;
+    }
+
+    // Sets weight to default
+    public void setWeight() {
+        weight = 0;
+    }
+
+    // Sets weight to value
+    public void setWeight(int value) {
+        weight = value;
+    }
 }
