@@ -20,7 +20,7 @@ public class AlgGeneral {
 
         int x = 0;
         while (x < totalAlgNumber) {
-            algResults.add(null);
+            algResults.add(3);
             x += 1;
         }
     }
