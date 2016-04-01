@@ -58,6 +58,19 @@ public class PlayRPS {
         return algIndex - 1;
     }
 
+    private static int runChosenAlg(ArrayList algs, int chosenAlgNumber) {
+
+        Method getAlgMethod;
+
+        try {
+            getAlgMethod = algs.get(chosenAlgNumber).getClass().getDeclaredMethod("getAlg", new Class<?>[]{playerGeneral.getClass(), algGeneral.getClass()});
+            return (int) getAlgMethod.invoke(algs.get(chosenAlgNumber), playerGeneral, algGeneral);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     private static void setTotal(ArrayList algs, int weight) {
 
         Field totalField;
