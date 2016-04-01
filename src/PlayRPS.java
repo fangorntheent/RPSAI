@@ -86,8 +86,7 @@ public class PlayRPS {
             totalField = algs.get(i).getClass().getDeclaredField("weight");
             getTotalMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
             totalObject = totalField.get(algs.get(i));
-            getTotalMethod.invoke(algs.get(i));
-            return totalField.getInt(totalField);
+            return (int) getTotalMethod.invoke(algs.get(i));
         } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -122,8 +121,7 @@ public class PlayRPS {
                 weightField = algs.get(i).getClass().getDeclaredField("weight");
                 getWeightMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
                 weightObject = weightField.get(algs.get(i));
-                getWeightMethod.invoke(algs.get(i));
-                //  HELP ME. I'M STUCK AND I CAN'T COMPILE
+                return (int) getWeightMethod.invoke(algs.get(i));
             } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
@@ -134,6 +132,7 @@ public class PlayRPS {
 
         algGeneral = new AlgGeneral();
         playerGeneral = new PlayerGeneral();
+        playerGeneral.history.add(0);
 
         AlgOne algOne = new AlgOne();
         AlgTwo algTwo = new AlgTwo();
