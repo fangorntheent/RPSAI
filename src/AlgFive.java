@@ -32,7 +32,7 @@ public class AlgFive {
     }
 
     // Add and return Alg's throw
-    public int getAlgFive(AlgGeneral algGeneral) {
+    public int getAlg(AlgGeneral algGeneral) {
 
         algGeneral.algResults.set(algNumber, new Random().nextInt(2));
         history.add(algGeneral.algResults.get(algNumber));
@@ -40,11 +40,11 @@ public class AlgFive {
     }
 
     // Add and return Alg's throw
-    public int getAlgFive(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
+    public int getAlg(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         // Needs extra time to kick in but must maintain same standards
         if (playerGeneral.history.size() < 4) {
-            algGeneral.algResults.set(algNumber, getAlgFive(algGeneral));
+            algGeneral.algResults.set(algNumber, getAlg(algGeneral));
             return (Integer) (history.get(history.size() - 1));
         }
 
