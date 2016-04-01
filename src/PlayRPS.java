@@ -123,7 +123,7 @@ public class PlayRPS {
                 getWeightMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
                 weightObject = weightField.get(algs.get(i));
                 getWeightMethod.invoke(algs.get(i));
-                return weightField.getInt(weightField);
+                //  HELP ME. I'M STUCK AND I CAN'T COMPILE
             } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
