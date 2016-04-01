@@ -78,16 +78,12 @@ public class PlayRPS {
 
     private static int getTotal(ArrayList algs, int i) {
 
-        Field totalField;
         Method getTotalMethod;
-        Object totalObject;
 
         try {
-            totalField = algs.get(i).getClass().getDeclaredField("weight");
             getTotalMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
-            totalObject = totalField.get(algs.get(i));
             return (int) getTotalMethod.invoke(algs.get(i));
-        } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return 1;
@@ -113,16 +109,12 @@ public class PlayRPS {
 
     private static int getWeight(ArrayList algs, int i) {
 
-        Field weightField;
         Method getWeightMethod;
-        Object weightObject;
 
             try {
-                weightField = algs.get(i).getClass().getDeclaredField("weight");
                 getWeightMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
-                weightObject = weightField.get(algs.get(i));
                 return (int) getWeightMethod.invoke(algs.get(i));
-            } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         return 1;
