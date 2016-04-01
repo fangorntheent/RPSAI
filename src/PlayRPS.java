@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class PlayRPS {
 
     private Translator translator = new Translator();
+    private static int matchNumber = 0;
+
+    private static AlgGeneral algGeneral;
+    private static PlayerGeneral playerGeneral;
 
     private void printWinner(int playerPrev, int algPrev) {
 
@@ -25,28 +29,111 @@ public class PlayRPS {
     }
 
     private static int combineAlgs(ArrayList algs) {
-        return -1;
+
+        int algIndex = 0;
+        Method method;
+
+        for (int i = 0; i < algs.size(); i++) {
+            try {
+                method = algs.get(i).getClass().getDeclaredMethod("getAlg", new Class<?>[]{playerGeneral.getClass(), algGeneral.getClass()});
+                method.invoke(algs.get(i), playerGeneral, algGeneral);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        for (int i = 0; i <= matchNumber; i++)
+            setTotal(algs, 1);
+        for (int i = 0; i <= 2; i++)
+            setTotal(algs, 3);
+        for (int i = 3; i <= 4; i++)
+            setTotal(algs, 2);
+
+        for (int i = 1; i < algGeneral.algResults.size(); i++) {
+            algGeneral.algResults.set(i, getTotal(algs, i));
+            if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(i - 1)))
+                algIndex = i;
+        }
+
+        algGeneral.algResults.set(0, algIndex);
+        return algIndex - 1;
+    }
+
+    private static void setTotal(ArrayList algs, int weight) {
+
+        Field totalField;
+        Method setTotal;
+        Object totalObject;
+
+        for (int i = 0; i < algs.size(); i++) {
+            try {
+                totalField = algs.get(i).getClass().getDeclaredField("total");
+                setTotal = algs.get(i).getClass().getDeclaredMethod("setTotal", new Class<?>[]{int.class});
+                totalObject = totalField.get(algs.get(i));
+                setTotal.invoke(algs.get(i), (Integer)(totalObject) * getWeight(algs, i) * weight);
+            } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static int getTotal(ArrayList algs, int i) {
+
+        Field totalField;
+        Method getTotalMethod;
+        Object totalObject;
+
+        try {
+            totalField = algs.get(i).getClass().getDeclaredField("weight");
+            getTotalMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
+            totalObject = totalField.get(algs.get(i));
+            getTotalMethod.invoke(algs.get(i));
+            return totalField.getInt(totalField);
+        } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return 1;
     }
 
     private static void setWeight(ArrayList algs) {
 
-        for (int i = 0; i <= algs.size() - 1; i++) {
+        Field weightField;
+        Method setWeightMethod;
+        Object weightObject;
+
+        for (int i = 0; i < algs.size(); i++) {
             try {
-                Field field = algs.get(i).getClass().getDeclaredField("weight");
-                Method method = algs.get(i).getClass().getDeclaredMethod("setWeight", new Class<?>[]{int.class});
-                Object weight = field.get(algs.get(i));
-                method.invoke(algs.get(i), (Integer)(1) + (Integer)(weight));
-                weight = field.get(algs.get(i));
-                System.out.println(weight);
+                weightField = algs.get(i).getClass().getDeclaredField("weight");
+                setWeightMethod = algs.get(i).getClass().getDeclaredMethod("setWeight", new Class<?>[]{int.class});
+                weightObject = weightField.get(algs.get(i));
+                setWeightMethod.invoke(algs.get(i), (Integer)(weightObject) + (Integer)(1));
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
         }
     }
+
+    private static int getWeight(ArrayList algs, int i) {
+
+        Field weightField;
+        Method getWeightMethod;
+        Object weightObject;
+
+            try {
+                weightField = algs.get(i).getClass().getDeclaredField("weight");
+                getWeightMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
+                weightObject = weightField.get(algs.get(i));
+                getWeightMethod.invoke(algs.get(i));
+                return weightField.getInt(weightField);
+            } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        return 1;
+    }
+
     public static void main(String[] args) {
 
-        AlgGeneral algGeneral = new AlgGeneral();
-        PlayerGeneral playerGeneral = new PlayerGeneral();
+        algGeneral = new AlgGeneral();
+        playerGeneral = new PlayerGeneral();
 
         AlgOne algOne = new AlgOne();
         AlgTwo algTwo = new AlgTwo();
@@ -67,6 +154,7 @@ public class PlayRPS {
         algList.add(algSeven);
 
         setWeight(algList);
+        int alg = combineAlgs(algList);
 
         algGeneral.algResults.set(0, algGeneral.totalAlgNumber + 1);
         String s = algGeneral.algResults.toString();
