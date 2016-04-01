@@ -104,11 +104,11 @@ public class AlgFour {
 
     // Sets weight to default
     public void setWeight() {
-        weight = 1;
+        weight = repeat;
     }
 
     // Sets weight to value
     public void setWeight(int value) {
-        weight = value;
+        weight = value * repeat;
     }
 }
