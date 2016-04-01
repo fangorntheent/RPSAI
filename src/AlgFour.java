@@ -57,16 +57,16 @@ public class AlgFour {
 
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
-        if (winPrev == 0) {
+        if (playerPrev == playerPrevPrev) {
             algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
 
-            if ((playerPrev == playerPrevPrev) && (winPrevPrev == 0))
+            if (winPrevPrev == 0)
                 repeat += 3;
 
             repeat += 2;
         }
         else
-            repeat -= 1;
+            repeat = 1;
 
         history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
