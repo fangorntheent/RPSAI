@@ -2,19 +2,20 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Gus Lipkin on 3/28/2016.
  */
 public class PlayRPS {
 
-    private Translator translator = new Translator();
+    private static Translator translator = new Translator();
     private static int matchNumber = 0;
 
     private static AlgGeneral algGeneral;
     private static PlayerGeneral playerGeneral;
 
-    private void printWinner(int playerPrev, int algPrev) {
+    private static void printWinner(int playerPrev, int algPrev) {
 
         WinChecker winChecker = new WinChecker(playerPrev, algPrev);
 
@@ -55,7 +56,7 @@ public class PlayRPS {
         }
 
         algGeneral.algResults.set(0, algIndex);
-        return algIndex - 1;
+        return algIndex;
     }
 
     private static int runChosenAlg(ArrayList algs, int chosenAlgNumber) {
@@ -64,7 +65,8 @@ public class PlayRPS {
 
         try {
             getAlgMethod = algs.get(chosenAlgNumber).getClass().getDeclaredMethod("getAlg", new Class<?>[]{playerGeneral.getClass(), algGeneral.getClass()});
-            return (int) getAlgMethod.invoke(algs.get(chosenAlgNumber), playerGeneral, algGeneral);
+            algGeneral.history.add(getAlgMethod.invoke(algs.get(chosenAlgNumber), playerGeneral, algGeneral));
+            return (int) algGeneral.history.get(algGeneral.history.size() - 1);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -138,6 +140,7 @@ public class PlayRPS {
         algGeneral = new AlgGeneral();
         playerGeneral = new PlayerGeneral();
         playerGeneral.history.add(0);
+        algGeneral.history.add(0);
 
         AlgOne algOne = new AlgOne();
         AlgTwo algTwo = new AlgTwo();
@@ -157,13 +160,21 @@ public class PlayRPS {
         algList.add(algSix);
         algList.add(algSeven);
 
-        setWeight(algList);
-        int alg = combineAlgs(algList);
+        int alg = 0;
 
-        algGeneral.algResults.set(0, algGeneral.totalAlgNumber + 1);
+        for (int i = 0; i < 10; i++) {
+            playerGeneral.history.add(new Random().nextInt(2));
+            setWeight(algList);
+            alg = combineAlgs(algList);
+            runChosenAlg(algList, alg);
+            printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
+            matchNumber++;
+        }
+        /*algGeneral.algResults.set(0, algGeneral.totalAlgNumber + 1);
         String s = algGeneral.algResults.toString();
         s = s.replaceAll(", ", "");
         s = s.substring(1, s.length() - 1);
         System.out.println(s);
+        */
     }
 }
