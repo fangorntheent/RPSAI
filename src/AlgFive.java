@@ -43,10 +43,8 @@ public class AlgFive {
     public int getAlg(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         // Needs extra time to kick in but must maintain same standards
-        if (playerGeneral.history.size() < 4) {
-            algGeneral.algResults.set(algNumber, getAlg(algGeneral));
-            return (Integer) (history.get(history.size() - 1));
-        }
+        if (playerGeneral.history.size() < 4)
+            return getAlg(algGeneral);
 
         int r = 0;
         int p = 0;

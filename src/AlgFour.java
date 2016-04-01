@@ -45,10 +45,8 @@ public class AlgFour {
 
     public int getAlg(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
-        if (playerGeneral.history.size() < 2) {
-            algGeneral.algResults.set(algNumber, getAlg(algGeneral));
-            return (Integer) (history.get(history.size() - 1));
-        }
+        if (playerGeneral.history.size() < 2)
+            return getAlg(algGeneral);
 
         int playerPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 1));
         int playerPrevPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 2));

@@ -44,7 +44,7 @@ public class AlgSeven {
 
         // Needs extra time to kick in but must maintain same standards
         if (playerGeneral.history.size() < 3)
-            algGeneral.algResults.set(algNumber, getAlg(algGeneral));
+            return getAlg(algGeneral);
 
         WinningPlay winningPlay = new WinningPlay();
 
