@@ -39,23 +39,20 @@ public class PlayRPS {
 
             algs.get(j).getAlg(playerGeneral, algGeneral);
             for (int i = 0; i < matchNumber; i++)
-                algs.get(j).setTotal((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight());
+                algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight()));
             if (matchNumber > 2)
                 for (int i = 0; i <= 2; i++)
-                    algs.get(j).setTotal((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 3);
+                    algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 3));
             if (matchNumber > 3)
                 for (int i = 3; i <= 4; i++)
-                    algs.get(j).setTotal((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 2);
-            System.out.println(algs.get(j).getTotal());
+                    algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 2));
         }
 
         for (int i = 0; i < algGeneral.algResults.size(); i++) {
             algGeneral.algResults.set(i, algs.get(i).getTotal());
             if (i > 0)
-                if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(i - 1))) {
-                    System.out.println((Integer) (algGeneral.algResults.get(i)) + " " + (Integer) (algGeneral.algResults.get(i - 1)));
+                if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(i - 1)))
                     algIndex = i;
-                }
         }
 
         algGeneral.chosenAlgNumber = algIndex;
@@ -129,11 +126,5 @@ public class PlayRPS {
             printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
             matchNumber++;
         }
-        /*algGeneral.algResults.set(0, algGeneral.totalAlgNumber + 1);
-        String s = algGeneral.algResults.toString();
-        s = s.replaceAll(", ", "");
-        s = s.substring(1, s.length() - 1);
-        System.out.println(s);
-        */
     }
 }
