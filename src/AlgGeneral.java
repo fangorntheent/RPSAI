@@ -19,11 +19,8 @@ public class AlgGeneral {
         winHistory = new ArrayList<>();
         algResults = new ArrayList<>();
 
-        int x = 0;
-        while (x < totalAlgNumber) {
+        for (int i = 0; i < totalAlgNumber; i++)
             algResults.add(3);
-            x += 1;
-        }
     }
 
     public void algChooser() {
