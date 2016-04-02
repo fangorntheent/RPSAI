@@ -38,6 +38,7 @@ public class AlgGeneral {
         else
             return b;
     }
+
     public int winningPlaySeeder(int r, int p, int s) {
 
         WinningPlay winningPlay = new WinningPlay();
