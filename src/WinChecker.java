@@ -13,7 +13,7 @@ public class WinChecker {
         winnerText = "error";
     }
 
-    public WinChecker(int player, int ai) {
+    public void setWinner(int player, int ai) {
         if ((player - ai == 1) || (player - ai == -2)) {
             winnerInt = 1;
             winnerText = "tie";
@@ -28,7 +28,7 @@ public class WinChecker {
         }
     }
 
-    public WinChecker(int player, int ai, ArrayList<Integer> history) {
+    public void addWinner(int player, int ai, ArrayList<Integer> history) {
         if ((player - ai == 1) || (player - ai == -2)) {
             winnerInt = 0;
             winnerText =  "player";

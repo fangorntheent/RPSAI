@@ -56,8 +56,10 @@ public class AlgTwo implements AlgInterface {
         int playerPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1));
         int playerPrevPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 2));
 
-        WinChecker winCheckerPrev = new WinChecker(playerPrev, algPrev);
-        WinChecker winCheckerPrevPrev = new WinChecker(playerPrevPrev, algPrevPrev);
+        WinChecker winCheckerPrev = new WinChecker();
+        winCheckerPrev.setWinner(playerPrev, algPrev);
+        WinChecker winCheckerPrevPrev = new WinChecker();
+        winCheckerPrevPrev.setWinner(playerPrevPrev, algPrevPrev);
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
         if (playerPrev == playerPrevPrev)

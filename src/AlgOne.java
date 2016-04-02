@@ -51,7 +51,8 @@ public class AlgOne implements AlgInterface {
         int algPrev = (Integer)(algGeneral.history.get(algGeneral.history.size() - 1));
         int playerPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1));
 
-        WinChecker winChecker = new WinChecker(playerPrev, algPrev);
+        WinChecker winChecker = new WinChecker();
+        winChecker.setWinner(playerPrev, algPrev);
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
         if (winChecker.winnerText == "player")
