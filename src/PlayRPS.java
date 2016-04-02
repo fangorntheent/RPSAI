@@ -36,7 +36,6 @@ public class PlayRPS {
         int algIndex = 0;
 
         for (int j = 0; j < algs.size(); j++) {
-
             algs.get(j).getAlg(playerGeneral, algGeneral);
             for (int i = 0; i < matchNumber; i++)
                 algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight()));
@@ -51,7 +50,7 @@ public class PlayRPS {
         for (int i = 0; i < algGeneral.algResults.size(); i++) {
             algGeneral.algResults.set(i, algs.get(i).getTotal());
             if (i > 0)
-                if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(i - 1)))
+                if ((Integer)(algGeneral.algResults.get(algIndex)) > (Integer)(algGeneral.algResults.get(i - 1)))
                     algIndex = i;
         }
 
@@ -63,6 +62,8 @@ public class PlayRPS {
 
         int algPrev = algs.get(algGeneral.chosenAlgNumber).getHistory().get(algs.get(algGeneral.chosenAlgNumber).getHistory().size() - 1);
         winChecker.addWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), algPrev, algGeneral.winHistory);
+        algGeneral.history.add(algPrev);
+        System.out.println(algPrev);
         return algPrev;
     }
 
@@ -79,6 +80,7 @@ public class PlayRPS {
     }
 
     private static void addWinHistory(ArrayList<AlgInterface> algs) {
+
         for (AlgInterface alg : algs) {
             if (alg.getHistory().size() > 0)
                 winChecker.setWinner((Integer) (playerGeneral.history.get(playerGeneral.history.size() - 1)), alg.getHistory().get(alg.getHistory().size() - 1));
