@@ -25,7 +25,7 @@ public class AlgSix implements AlgInterface {
     public AlgSix() {
 
         algNumber = 5;
-        total = 0;
+        total = 1;
         weight = 1;
         history = new ArrayList<>();
         winHistory = new ArrayList<>();
@@ -78,7 +78,7 @@ public class AlgSix implements AlgInterface {
 
     // Sets total to default
     public void setTotal() {
-        total = 0;
+        total = 1;
     }
 
     // Sets total to value

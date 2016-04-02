@@ -28,7 +28,7 @@ public class AlgFour implements AlgInterface {
     public AlgFour() {
 
         algNumber = 3;
-        total = 0;
+        total = 1;
         weight = 1;
         repeat = 1;
         history = new ArrayList<>();
@@ -91,7 +91,7 @@ public class AlgFour implements AlgInterface {
 
     // Sets total to default
     public void setTotal() {
-        total = 0;
+        total = 1;
     }
 
     // Sets total to value

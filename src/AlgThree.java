@@ -30,7 +30,7 @@ public class AlgThree implements AlgInterface {
     public AlgThree() {
 
         algNumber = 2;
-        total = 0;
+        total = 1;
         weight = 1;
         history = new ArrayList<>();
         winHistory = new ArrayList<>();
@@ -83,7 +83,7 @@ public class AlgThree implements AlgInterface {
 
     // Sets total to default
     public void setTotal() {
-        total = 0;
+        total = 1;
     }
 
     // Sets total to value

@@ -30,7 +30,7 @@ public class AlgTwo implements AlgInterface {
     public AlgTwo() {
 
         algNumber = 1;
-        total = 0;
+        total = 1;
         weight = 1;
         repeat = 1;
         history = new ArrayList<>();
@@ -94,7 +94,7 @@ public class AlgTwo implements AlgInterface {
 
     // Sets total to default
     public void setTotal() {
-        total = 0;
+        total = 1;
     }
 
     // Sets total to value
