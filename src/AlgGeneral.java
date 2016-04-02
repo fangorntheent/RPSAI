@@ -23,11 +23,6 @@ public class AlgGeneral {
             algResults.add(3);
     }
 
-    public void algChooser() {
-
-        history.add(history.get((Integer)(algResults.get(0))));
-    }
-
     private int equalPlaySeeder(int a, int b) {
         int random = new Random().nextInt(2);
 
