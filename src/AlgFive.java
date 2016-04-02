@@ -4,7 +4,7 @@ import java.util.Random;
 /**
  * Created by Gus Lipkin on 3/29/2016.
  */
-public class AlgFive {
+public class AlgFive implements AlgInterface {
 
     // Alg number
     public int algNumber;

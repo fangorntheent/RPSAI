@@ -11,7 +11,7 @@ import java.util.Random;
  *  if ai won, play player's most recent play
  *  if tie, play what would have lost to player's most recent play
  */
-public class AlgOne {
+public class AlgOne implements AlgInterface {
 
     // Alg number
     public int algNumber;

@@ -11,7 +11,7 @@ import java.util.Random;
  *      repeat counter directly affects weight
  *  if player didn't repeat, reset the repeat counter to 1 then assume they will repeat
  */
-public class AlgTwo { 
+public class AlgTwo implements AlgInterface {
 
     // Alg number
     public int algNumber;

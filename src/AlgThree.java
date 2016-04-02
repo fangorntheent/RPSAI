@@ -9,7 +9,7 @@ import java.util.Random;
  * ALGORITHM SUMMARY
  *  See purpose
  */
-public class AlgThree {
+public class AlgThree implements AlgInterface {
 
     // Alg number
     public int algNumber;

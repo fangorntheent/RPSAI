@@ -9,7 +9,7 @@ import java.util.Random;
  * ALGORITHM SUMMARY
  *  if ai lost, calculate winning play and adjust weight as necessary
  */
-public class AlgFour {
+public class AlgFour implements AlgInterface {
 
     // Alg number
     public int algNumber;
