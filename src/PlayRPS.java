@@ -99,8 +99,6 @@ public class PlayRPS {
         algList.add(algSix);
         algList.add(algSeven);
 
-        int alg = 0;
-
         for (int i = 0; i < 10; i++) {
             playerGeneral.history.add(new Random().nextInt(3));
             setWeight(algList);
