@@ -48,8 +48,8 @@ public class AlgFour implements AlgInterface {
         if (playerGeneral.history.size() < 2)
             return getAlg(algGeneral);
 
-        int playerPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 1));
-        int playerPrevPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 2));
+        int playerPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1));
+        int playerPrevPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 2));
         int winPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 1));
         int winPrevPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 2));
 
