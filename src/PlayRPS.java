@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by Gus Lipkin on 3/28/2016.
@@ -19,13 +20,28 @@ public class PlayRPS {
         winChecker.setWinner(playerPrev, algPrev);
 
         if (winChecker.winnerInt == 0)
-            System.out.println("Your " + translator.numToWords(playerPrev) + " BEATS " + translator.numToWords(algPrev));
+            System.out.println(" Your " + translator.numToWords(playerPrev) + " BEATS " + translator.numToWords(algPrev));
         else if (winChecker.winnerInt == 1)
-            System.out.println("Your " + translator.numToWords(playerPrev) + " TIES WITH " + translator.numToWords(algPrev));
+            System.out.println(" Your " + translator.numToWords(playerPrev) + " TIES WITH " + translator.numToWords(algPrev));
         else if (winChecker.winnerInt == 2)
-            System.out.println("Your " + translator.numToWords(playerPrev) + " LOSES TO " + translator.numToWords(algPrev));
+            System.out.println(" Your " + translator.numToWords(playerPrev) + " LOSES TO " + translator.numToWords(algPrev));
         else
             System.out.println("Oops. I farted.");
+    }
+
+    private static int parseInput(String str) {
+
+        /*
+        if (!(str.equals("r") || str.equals("p") || str.equals("p"))) {
+            matchNumber--;
+            playerGeneral.history.remove(playerGeneral.history.size() - 1);
+        }
+        */
+        if (str.equals("scores"))
+            System.out.println("Yet to be implemented");
+        if (str.equals("stop"))
+            return 0;
+        return 1;
     }
 
     private static int combineAlgs(ArrayList<AlgInterface> algs) {
@@ -115,6 +131,24 @@ public class PlayRPS {
 
         addWinHistory(algList);
 
+        Scanner reader = new Scanner(System.in);
+        String userInput;
+
+        while (true) {
+            System.out.println("Round: " + matchNumber);
+            System.out.println(" Choose your throw: ");
+            playerGeneral.history.add(translator.wordsToNum(reader.next()));
+            if (parseInput(playerGeneral.history.get(playerGeneral.history.size() - 1).toString()) == 0)
+                break;
+            setWeight(algList);
+            algGeneral.chosenAlgNumber = combineAlgs(algList);
+            runChosenAlg(algList);
+            addWinHistory(algList);
+            printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
+            matchNumber++;
+        }
+
+        /* For simulated playing for testing purposes
         for (int i = 0; i < 10; i++) {
             playerGeneral.history.add(new Random().nextInt(3));
             setWeight(algList);
@@ -124,5 +158,6 @@ public class PlayRPS {
             printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
             matchNumber++;
         }
+        */
     }
 }
