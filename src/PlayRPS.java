@@ -63,7 +63,6 @@ public class PlayRPS {
         int algPrev = algs.get(algGeneral.chosenAlgNumber).getHistory().get(algs.get(algGeneral.chosenAlgNumber).getHistory().size() - 1);
         winChecker.addWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), algPrev, algGeneral.winHistory);
         algGeneral.history.add(algPrev);
-        System.out.println(algPrev);
         return algPrev;
     }
 
