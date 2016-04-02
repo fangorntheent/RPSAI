@@ -38,7 +38,7 @@ public class AlgFour implements AlgInterface {
     // Add and return Alg's throw
     public int getAlg(AlgGeneral algGeneral) {
 
-        algGeneral.algResults.set(algNumber, new Random().nextInt(2));
+        algGeneral.algResults.set(algNumber, new Random().nextInt(3));
         history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }
@@ -50,7 +50,6 @@ public class AlgFour implements AlgInterface {
 
         int playerPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1));
         int playerPrevPrev = (Integer)(playerGeneral.history.get(playerGeneral.history.size() - 2));
-        int winPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 1));
         int winPrevPrev = (Integer)(algGeneral.winHistory.get(algGeneral.winHistory.size() - 2));
 
         WinningPlay winningPlay = new WinningPlay(playerPrev);

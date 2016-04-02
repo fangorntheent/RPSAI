@@ -37,7 +37,7 @@ public class AlgOne implements AlgInterface {
     // Add and return Alg's throw
     public int getAlg(AlgGeneral algGeneral) {
 
-        algGeneral.algResults.set(algNumber, new Random().nextInt(2));
+        algGeneral.algResults.set(algNumber, new Random().nextInt(3));
         history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
     }

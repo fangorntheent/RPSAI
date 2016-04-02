@@ -31,7 +31,7 @@ public class AlgGeneral {
     }
 
     private int equalPlaySeeder(int a, int b) {
-        int random = new Random().nextInt(1);
+        int random = new Random().nextInt(2);
 
         if (random == 0)
             return a;
@@ -56,7 +56,7 @@ public class AlgGeneral {
         else if (p == s)
             winningPlay.setWinningPlay(equalPlaySeeder(p, s));
         else
-            winningPlay.setWinningPlay(new Random().nextInt(2));
+            winningPlay.setWinningPlay(new Random().nextInt(3));
 
         return winningPlay.winningPlay;
     }
@@ -78,7 +78,7 @@ public class AlgGeneral {
         else if (p == s)
             winningPlay.setWinningPlay(equalPlaySeeder(p, s));
         else
-            winningPlay.setWinningPlay(new Random().nextInt(2));
+            winningPlay.setWinningPlay(new Random().nextInt(3));
 
         return winningPlay.winningPlay;
     }
