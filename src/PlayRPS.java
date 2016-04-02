@@ -35,23 +35,30 @@ public class PlayRPS {
 
         int algIndex = 0;
 
-        for (int i = 0; i < algs.size(); i++)
-            algs.get(i).getAlg(playerGeneral, algGeneral);
+        for (int j = 0; j < algs.size(); j++) {
 
-        for (int i = 0; i < matchNumber; i++)
-            algs.get(i).setTotal(algs.get(i).getTotal() * algs.get(i).getWeight());
-        for (int i = 0; i <= 2; i++)
-            algs.get(i).setTotal(algs.get(i).getTotal() * algs.get(i).getWeight() * 3);
-        for (int i = 3; i <= 4; i++)
-            algs.get(i).setTotal(algs.get(i).getTotal() * algs.get(i).getWeight() * 2);
-
-        for (int i = 1; i < algGeneral.algResults.size(); i++) {
-            algGeneral.algResults.set(i, algs.get(i).getTotal());
-            if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(i - 1)))
-                algIndex = i;
+            algs.get(j).getAlg(playerGeneral, algGeneral);
+            for (int i = 0; i < matchNumber; i++)
+                algs.get(j).setTotal((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight());
+            if (matchNumber > 2)
+                for (int i = 0; i <= 2; i++)
+                    algs.get(j).setTotal((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 3);
+            if (matchNumber > 3)
+                for (int i = 3; i <= 4; i++)
+                    algs.get(j).setTotal((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 2);
+            System.out.println(algs.get(j).getTotal());
         }
 
-        algGeneral.algResults.set(0, algIndex);
+        for (int i = 0; i < algGeneral.algResults.size(); i++) {
+            algGeneral.algResults.set(i, algs.get(i).getTotal());
+            if (i > 0)
+                if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(i - 1))) {
+                    System.out.println((Integer) (algGeneral.algResults.get(i)) + " " + (Integer) (algGeneral.algResults.get(i - 1)));
+                    algIndex = i;
+                }
+        }
+
+        algGeneral.chosenAlgNumber = algIndex;
         return algIndex;
     }
 
@@ -59,14 +66,26 @@ public class PlayRPS {
 
         int algPrev = algs.get(algGeneral.chosenAlgNumber).getHistory().get(algs.get(algGeneral.chosenAlgNumber).getHistory().size() - 1);
         winChecker.addWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), algPrev, algGeneral.winHistory);
-        System.out.println(algPrev);
         return algPrev;
     }
 
     private static void setWeight(ArrayList<AlgInterface> algs) {
 
-        for (int i = 0; i < algs.size(); i++) {
-            algs.get(i).setWeight(algs.get(i).getWeight() + 1);
+        for (AlgInterface alg : algs) {
+            if (alg.getWinHistory().size() > 0) {
+                if (alg.getWinHistory().get(alg.getWinHistory().size() - 1) == 2)
+                    alg.setWeight(alg.getWeight() + 2);
+                else if (alg.getWinHistory().get(alg.getWinHistory().size() - 1) == 1)
+                    alg.setWeight(alg.getWeight() + 1);
+            }
+        }
+    }
+
+    private static void addWinHistory(ArrayList<AlgInterface> algs) {
+        for (AlgInterface alg : algs) {
+            if (alg.getHistory().size() > 0)
+                winChecker.setWinner((Integer) (playerGeneral.history.get(playerGeneral.history.size() - 1)), alg.getHistory().get(alg.getHistory().size() - 1));
+            alg.getWinHistory().add(winChecker.winnerInt);
         }
     }
 
@@ -99,11 +118,14 @@ public class PlayRPS {
         algList.add(algSix);
         algList.add(algSeven);
 
+        addWinHistory(algList);
+
         for (int i = 0; i < 10; i++) {
             playerGeneral.history.add(new Random().nextInt(3));
             setWeight(algList);
             algGeneral.chosenAlgNumber = combineAlgs(algList);
             runChosenAlg(algList);
+            addWinHistory(algList);
             printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
             matchNumber++;
         }
