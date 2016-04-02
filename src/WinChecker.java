@@ -15,12 +15,12 @@ public class WinChecker {
 
     public void setWinner(int player, int ai) {
         if ((player - ai == 1) || (player - ai == -2)) {
-            winnerInt = 1;
-            winnerText = "tie";
+            winnerInt = 0;
+            winnerText = "player";
         }
         else if ((player - ai == -1) || (player - ai == 2)) {
-            winnerInt = 1;
-            winnerText = "tie";
+            winnerInt = 2;
+            winnerText = "ai";
         }
         else {
             winnerInt = 1;
