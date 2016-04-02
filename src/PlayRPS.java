@@ -14,10 +14,12 @@ public class PlayRPS {
 
     private static AlgGeneral algGeneral;
     private static PlayerGeneral playerGeneral;
+    private static WinChecker winChecker;
 
     private static void printWinner(int playerPrev, int algPrev) {
 
-        WinChecker winChecker = new WinChecker(playerPrev, algPrev);
+        WinChecker winChecker = new WinChecker();
+        winChecker.setWinner(playerPrev, algPrev);
 
         if (winChecker.winnerInt == 0)
             System.out.println("Your " + translator.numToWords(playerPrev) + " BEATS " + translator.numToWords(algPrev));
@@ -29,28 +31,22 @@ public class PlayRPS {
             System.out.println("Oops. I farted.");
     }
 
-    private static int combineAlgs(ArrayList algs) {
+    private static int combineAlgs(ArrayList<AlgInterface> algs) {
 
         int algIndex = 0;
-        Method method;
 
-        for (int i = 0; i < algs.size(); i++) {
-            try {
-                method = algs.get(i).getClass().getDeclaredMethod("getAlg", new Class<?>[]{playerGeneral.getClass(), algGeneral.getClass()});
-                method.invoke(algs.get(i), playerGeneral, algGeneral);
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-        for (int i = 0; i <= matchNumber; i++)
-            setTotal(algs, 1);
+        for (int i = 0; i < algs.size(); i++)
+            algs.get(i).getAlg(playerGeneral, algGeneral);
+
+        for (int i = 0; i < matchNumber; i++)
+            algs.get(i).setTotal(algs.get(i).getTotal() * algs.get(i).getWeight());
         for (int i = 0; i <= 2; i++)
-            setTotal(algs, 3);
+            algs.get(i).setTotal(algs.get(i).getTotal() * algs.get(i).getWeight() * 3);
         for (int i = 3; i <= 4; i++)
-            setTotal(algs, 2);
+            algs.get(i).setTotal(algs.get(i).getTotal() * algs.get(i).getWeight() * 2);
 
         for (int i = 1; i < algGeneral.algResults.size(); i++) {
-            algGeneral.algResults.set(i, getTotal(algs, i));
+            algGeneral.algResults.set(i, algs.get(i).getTotal());
             if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(i - 1)))
                 algIndex = i;
         }
@@ -59,98 +55,41 @@ public class PlayRPS {
         return algIndex;
     }
 
-    private static int runChosenAlg(ArrayList algs, int chosenAlgNumber) {
+    private static int runChosenAlg(ArrayList<AlgInterface> algs) {
 
-        Method getAlgMethod;
-
-        try {
-            getAlgMethod = algs.get(chosenAlgNumber).getClass().getDeclaredMethod("getAlg", new Class<?>[]{playerGeneral.getClass(), algGeneral.getClass()});
-            algGeneral.history.add(getAlgMethod.invoke(algs.get(chosenAlgNumber), playerGeneral, algGeneral));
-            return (int) algGeneral.history.get(algGeneral.history.size() - 1);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return 0;
+        int algPrev = algs.get(algGeneral.chosenAlgNumber).getHistory().get(algs.get(algGeneral.chosenAlgNumber).getHistory().size() - 1);
+        winChecker.addWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), algPrev, algGeneral.winHistory);
+        System.out.println(algPrev);
+        return algPrev;
     }
 
-    private static void setTotal(ArrayList algs, int weight) {
-
-        Field totalField;
-        Method setTotal;
-        Object totalObject;
+    private static void setWeight(ArrayList<AlgInterface> algs) {
 
         for (int i = 0; i < algs.size(); i++) {
-            try {
-                totalField = algs.get(i).getClass().getDeclaredField("total");
-                setTotal = algs.get(i).getClass().getDeclaredMethod("setTotal", new Class<?>[]{int.class});
-                totalObject = totalField.get(algs.get(i));
-                setTotal.invoke(algs.get(i), (Integer)(totalObject) * getWeight(algs, i) * weight);
-            } catch (NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            algs.get(i).setWeight(algs.get(i).getWeight() + 1);
         }
-    }
-
-    private static int getTotal(ArrayList algs, int i) {
-
-        Method getTotalMethod;
-
-        try {
-            getTotalMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
-            return (int) getTotalMethod.invoke(algs.get(i));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return 1;
-    }
-
-    private static void setWeight(ArrayList algs) {
-
-        Field weightField;
-        Method setWeightMethod;
-        Object weightObject;
-
-        for (int i = 0; i < algs.size(); i++) {
-            try {
-                weightField = algs.get(i).getClass().getDeclaredField("weight");
-                setWeightMethod = algs.get(i).getClass().getDeclaredMethod("setWeight", new Class<?>[]{int.class});
-                weightObject = weightField.get(algs.get(i));
-                setWeightMethod.invoke(algs.get(i), (Integer)(weightObject) + (Integer)(1));
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static int getWeight(ArrayList algs, int i) {
-
-        Method getWeightMethod;
-
-            try {
-                getWeightMethod = algs.get(i).getClass().getDeclaredMethod("getWeight");
-                return (int) getWeightMethod.invoke(algs.get(i));
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        return 1;
     }
 
     public static void main(String[] args) {
 
         algGeneral = new AlgGeneral();
         playerGeneral = new PlayerGeneral();
-        playerGeneral.history.add(0);
-        algGeneral.history.add(0);
+        winChecker = new WinChecker();
+        for (int i = 0; i < 2; i++) {
+            playerGeneral.history.add(new Random().nextInt(3));
+            algGeneral.history.add(new Random().nextInt(3));
+            algGeneral.winHistory.add(new Random().nextInt(3));
+        }
 
-        AlgOne algOne = new AlgOne();
-        AlgTwo algTwo = new AlgTwo();
-        AlgThree algThree = new AlgThree();
-        AlgFour algFour = new AlgFour();
-        AlgFive algFive = new AlgFive();
-        AlgSix algSix = new AlgSix();
-        AlgSeven algSeven = new AlgSeven();
+        AlgInterface algOne = new AlgOne();
+        AlgInterface algTwo = new AlgTwo();
+        AlgInterface algThree = new AlgThree();
+        AlgInterface algFour = new AlgFour();
+        AlgInterface algFive = new AlgFive();
+        AlgInterface algSix = new AlgSix();
+        AlgInterface algSeven = new AlgSeven();
 
-        ArrayList algList = new ArrayList<>();
+        ArrayList algList = new ArrayList<AlgInterface>();
 
         algList.add(algOne);
         algList.add(algTwo);
@@ -163,10 +102,10 @@ public class PlayRPS {
         int alg = 0;
 
         for (int i = 0; i < 10; i++) {
-            playerGeneral.history.add(new Random().nextInt(2));
+            playerGeneral.history.add(new Random().nextInt(3));
             setWeight(algList);
-            alg = combineAlgs(algList);
-            runChosenAlg(algList, alg);
+            algGeneral.chosenAlgNumber = combineAlgs(algList);
+            runChosenAlg(algList);
             printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
             matchNumber++;
         }
