@@ -11,6 +11,9 @@ public class PlayRPS {
     private static Translator translator = new Translator();
     private static int matchNumber = 0;
     private static int algIndex;
+    private static int playerScore = 0;
+    private static int aiScore = 0;
+    private static int tieScore = 0;
 
     private static AlgGeneral algGeneral;
     private static PlayerGeneral playerGeneral;
@@ -22,23 +25,46 @@ public class PlayRPS {
         winChecker.setWinner(playerPrev, algPrev);
 
         System.out.println(" The computer chose algorithm #" + (algIndex + 1));
-        if (winChecker.winnerInt == 0)
+        if (winChecker.winnerInt == 0) {
             System.out.println(" Your " + translator.numToWords(playerPrev) + " BEATS " + translator.numToWords(algPrev));
-        else if (winChecker.winnerInt == 1)
+            playerScore++;
+        }
+        else if (winChecker.winnerInt == 1) {
             System.out.println(" Your " + translator.numToWords(playerPrev) + " TIES WITH " + translator.numToWords(algPrev));
-        else if (winChecker.winnerInt == 2)
+            tieScore++;
+        }
+        else if (winChecker.winnerInt == 2) {
             System.out.println(" Your " + translator.numToWords(playerPrev) + " LOSES TO " + translator.numToWords(algPrev));
+            aiScore++;
+        }
         else
             System.out.println("Oops. I farted.");
     }
 
     private static int parseInput(String str) {
 
-        str.trim();
-        if (str.contains("scores"))
-            System.out.println("Yet to be implemented");
-        if (str.contains("stop"))
+        str.trim().toLowerCase();
+        if (!((str.equals("r")) || (str.equals("p")) || (str.equals("s")))) {
+            matchNumber--;
+            playerGeneral.history.remove(playerGeneral.history.size() - 1);
+        }
+        else
+            printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
+        if (str.equals("scores")) {
+            System.out.println(" Player: " + playerScore);
+            System.out.println(" Ai: " + aiScore);
+            System.out.println(" Tie: " + tieScore);
+        }
+        if (str.equals("help") || str.equals("h")) {
+            System.out.println(" To play: 'r', 'p', or 's'");
+            System.out.println(" To see scores: 'scores'");
+            System.out.println(" To exit: 'stop', 'exit', or 'quit'");
+            System.out.println(" To get help: 'help' or 'h'");
+        }
+        if (str.equals("stop") || str.equals("exit") || str.equals("quit")) {
+            System.out.println("The program will now exit.");
             return 0;
+        }
         return 1;
     }
 
@@ -130,18 +156,21 @@ public class PlayRPS {
         addWinHistory(algList);
 
         Scanner reader = new Scanner(System.in);
+        String input;
 
         while (true) {
+            if (matchNumber == 0)
+                System.out.println("To see options, press 'h', or type 'help'." + "\n");
             System.out.println("Round: " + matchNumber);
-            System.out.println(" Choose your throw: ");
-            playerGeneral.history.add(translator.wordsToNum(reader.nextLine()));
-            if (parseInput(playerGeneral.history.get(playerGeneral.history.size() - 1).toString()) == 0)
+            System.out.print(" Choose your throw: ");
+            input = reader.nextLine();
+            playerGeneral.history.add(translator.wordsToNum(input));
+            if (parseInput(input) == 0)
                 break;
             setWeight(algList);
             algGeneral.chosenAlgNumber = combineAlgs(algList);
             runChosenAlg(algList);
             addWinHistory(algList);
-            printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
             matchNumber++;
         }
 
