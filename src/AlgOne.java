@@ -55,7 +55,7 @@ public class AlgOne implements AlgInterface {
         winChecker.setWinner(playerPrev, algPrev);
         WinningPlay winningPlay = new WinningPlay(playerPrev);
 
-        if (winChecker.winnerText == "player")
+        if (winChecker.winnerText.equals("player"))
             algGeneral.algResults.set(algNumber, algPrev);
         else if (winChecker.winnerText.equals("ai"))
             algGeneral.algResults.set(algNumber, playerPrev);
