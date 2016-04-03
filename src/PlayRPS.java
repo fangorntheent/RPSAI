@@ -92,17 +92,16 @@ public class PlayRPS {
                 algIndex = i;
         }
 
-        System.out.println(algIndex + " " + algGeneral.algResults);
+        //System.out.println(algIndex + " " + algGeneral.algResults);
         algGeneral.chosenAlgNumber = algIndex;
         algGeneral.history.add(algs.get(algIndex).getHistory().get(algs.get(algIndex).getHistory().size() - 1));
         return algIndex;
     }
 
-    private static int runChosenAlg(ArrayList<AlgInterface> algs) {
+    private static void addChosenAlg(ArrayList<AlgInterface> algs) {
 
         int algPrev = algs.get(algGeneral.chosenAlgNumber).getHistory().get(algs.get(algGeneral.chosenAlgNumber).getHistory().size() - 1);
         winChecker.addWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), algPrev, algGeneral.winHistory);
-        return algPrev;
     }
 
     private static void setWeight(ArrayList<AlgInterface> algs) {
@@ -174,7 +173,7 @@ public class PlayRPS {
             else if (parseResult == 1) {
                 setWeight(algList);
                 algGeneral.chosenAlgNumber = combineAlgs(algList);
-                runChosenAlg(algList);
+                addChosenAlg(algList);
                 addWinHistory(algList);
                 matchNumber++;
             }
