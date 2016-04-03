@@ -1,3 +1,4 @@
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ public class PlayRPS {
 
     private static Translator translator = new Translator();
     private static int matchNumber = 0;
+    private static int algIndex;
 
     private static AlgGeneral algGeneral;
     private static PlayerGeneral playerGeneral;
@@ -19,6 +21,7 @@ public class PlayRPS {
         WinChecker winChecker = new WinChecker();
         winChecker.setWinner(playerPrev, algPrev);
 
+        System.out.println(" The computer chose algorithm #" + (algIndex + 1));
         if (winChecker.winnerInt == 0)
             System.out.println(" Your " + translator.numToWords(playerPrev) + " BEATS " + translator.numToWords(algPrev));
         else if (winChecker.winnerInt == 1)
@@ -41,7 +44,7 @@ public class PlayRPS {
 
     private static int combineAlgs(ArrayList<AlgInterface> algs) {
 
-        int algIndex = 0;
+        algIndex = 0;
 
         for (int j = 0; j < algs.size(); j++) {
             algs.get(j).getAlg(playerGeneral, algGeneral);
@@ -127,7 +130,6 @@ public class PlayRPS {
         addWinHistory(algList);
 
         Scanner reader = new Scanner(System.in);
-        String userInput;
 
         while (true) {
             System.out.println("Round: " + matchNumber);
