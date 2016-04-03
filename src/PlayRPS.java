@@ -45,26 +45,26 @@ public class PlayRPS {
 
         str.trim().toLowerCase();
         if (!((str.equals("r")) || (str.equals("p")) || (str.equals("s")))) {
-            matchNumber--;
             playerGeneral.history.remove(playerGeneral.history.size() - 1);
+            if (str.equals("scores")) {
+                System.out.println(" Player: " + playerScore);
+                System.out.println(" Ai: " + aiScore);
+                System.out.println(" Tie: " + tieScore);
+            }
+            if (str.equals("help") || str.equals("h")) {
+                System.out.println(" To play: 'r', 'p', or 's'");
+                System.out.println(" To see scores: 'scores'");
+                System.out.println(" To exit: 'stop', 'exit', or 'quit'");
+                System.out.println(" To get help: 'help' or 'h'");
+            }
+            if (str.equals("stop") || str.equals("exit") || str.equals("quit")) {
+                System.out.println("The program will now exit.");
+                return -1;
+            }
+            return 0;
         }
         else
             printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
-        if (str.equals("scores")) {
-            System.out.println(" Player: " + playerScore);
-            System.out.println(" Ai: " + aiScore);
-            System.out.println(" Tie: " + tieScore);
-        }
-        if (str.equals("help") || str.equals("h")) {
-            System.out.println(" To play: 'r', 'p', or 's'");
-            System.out.println(" To see scores: 'scores'");
-            System.out.println(" To exit: 'stop', 'exit', or 'quit'");
-            System.out.println(" To get help: 'help' or 'h'");
-        }
-        if (str.equals("stop") || str.equals("exit") || str.equals("quit")) {
-            System.out.println("The program will now exit.");
-            return 0;
-        }
         return 1;
     }
 
@@ -86,12 +86,15 @@ public class PlayRPS {
 
         for (int i = 0; i < algGeneral.algResults.size(); i++) {
             algGeneral.algResults.set(i, algs.get(i).getTotal());
-            if (i > 0)
-                if ((Integer)(algGeneral.algResults.get(algIndex)) > (Integer)(algGeneral.algResults.get(i - 1)))
-                    algIndex = i;
+            if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(algIndex))) {
+                algIndex = i;
+                System.out.println((Integer) (algGeneral.algResults.get(i)) + " " + (Integer) (algGeneral.algResults.get(algIndex)));
+            }
         }
 
+        System.out.println(algIndex + " " + algGeneral.algResults);
         algGeneral.chosenAlgNumber = algIndex;
+        algGeneral.history.add(algs.get(algIndex).getHistory().get(algs.get(algIndex).getHistory().size() - 1));
         return algIndex;
     }
 
@@ -99,7 +102,6 @@ public class PlayRPS {
 
         int algPrev = algs.get(algGeneral.chosenAlgNumber).getHistory().get(algs.get(algGeneral.chosenAlgNumber).getHistory().size() - 1);
         winChecker.addWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), algPrev, algGeneral.winHistory);
-        algGeneral.history.add(algPrev);
         return algPrev;
     }
 
@@ -157,6 +159,7 @@ public class PlayRPS {
 
         Scanner reader = new Scanner(System.in);
         String input;
+        int parseResult;
 
         while (true) {
             if (matchNumber == 0)
@@ -165,13 +168,16 @@ public class PlayRPS {
             System.out.print(" Choose your throw: ");
             input = reader.nextLine();
             playerGeneral.history.add(translator.wordsToNum(input));
-            if (parseInput(input) == 0)
+            parseResult = parseInput(input);
+            if (parseResult == -1)
                 break;
-            setWeight(algList);
-            algGeneral.chosenAlgNumber = combineAlgs(algList);
-            runChosenAlg(algList);
-            addWinHistory(algList);
-            matchNumber++;
+            else if (parseResult == 1) {
+                setWeight(algList);
+                algGeneral.chosenAlgNumber = combineAlgs(algList);
+                runChosenAlg(algList);
+                addWinHistory(algList);
+                matchNumber++;
+            }
         }
 
         /* For simulated playing for testing purposes
