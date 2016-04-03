@@ -61,8 +61,10 @@ public class AlgFour implements AlgInterface {
                 repeat += 3;
             repeat += 2;
         }
-        else
+        else {
             repeat = 1;
+            weight = 1;
+        }
 
         history.add(algGeneral.algResults.get(algNumber));
         return (Integer)(history.get(history.size() - 1));
