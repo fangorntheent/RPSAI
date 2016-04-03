@@ -74,22 +74,22 @@ public class PlayRPS {
 
         for (int j = 0; j < algs.size(); j++) {
             algs.get(j).getAlg(playerGeneral, algGeneral);
+            algs.get(j).setTotal(0);
             for (int i = 0; i < matchNumber; i++)
-                algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight()));
+                algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(algs.get(j).getWinHistory().size() - 1)) * algs.get(j).getWeight()));
             if (matchNumber > 2)
                 for (int i = 0; i <= 2; i++)
-                    algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 3));
+                    algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(algs.get(j).getWinHistory().size() - 1)) * algs.get(j).getWeight() * 3));
             if (matchNumber > 3)
                 for (int i = 3; i <= 4; i++)
-                    algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(i)) * algs.get(j).getWeight() * 2));
+                    algs.get(j).setTotal(algs.get(j).getTotal() + ((Integer)(algs.get(j).getWinHistory().get(algs.get(j).getWinHistory().size() - 1)) * algs.get(j).getWeight() * 2));
+
         }
 
         for (int i = 0; i < algGeneral.algResults.size(); i++) {
             algGeneral.algResults.set(i, algs.get(i).getTotal());
-            if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(algIndex))) {
+            if ((Integer)(algGeneral.algResults.get(i)) > (Integer)(algGeneral.algResults.get(algIndex)))
                 algIndex = i;
-                System.out.println((Integer) (algGeneral.algResults.get(i)) + " " + (Integer) (algGeneral.algResults.get(algIndex)));
-            }
         }
 
         System.out.println(algIndex + " " + algGeneral.algResults);
