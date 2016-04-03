@@ -31,15 +31,10 @@ public class PlayRPS {
 
     private static int parseInput(String str) {
 
-        /*
-        if (!(str.equals("r") || str.equals("p") || str.equals("p"))) {
-            matchNumber--;
-            playerGeneral.history.remove(playerGeneral.history.size() - 1);
-        }
-        */
-        if (str.equals("scores"))
+        str.trim();
+        if (str.contains("scores"))
             System.out.println("Yet to be implemented");
-        if (str.equals("stop"))
+        if (str.contains("stop"))
             return 0;
         return 1;
     }
