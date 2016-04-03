@@ -137,7 +137,7 @@ public class PlayRPS {
         while (true) {
             System.out.println("Round: " + matchNumber);
             System.out.println(" Choose your throw: ");
-            playerGeneral.history.add(translator.wordsToNum(reader.next()));
+            playerGeneral.history.add(translator.wordsToNum(reader.nextLine()));
             if (parseInput(playerGeneral.history.get(playerGeneral.history.size() - 1).toString()) == 0)
                 break;
             setWeight(algList);
