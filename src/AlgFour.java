@@ -59,7 +59,6 @@ public class AlgFour implements AlgInterface {
 
             if (winPrevPrev == 0)
                 repeat += 3;
-
             repeat += 2;
         }
         else
