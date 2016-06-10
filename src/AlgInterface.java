@@ -7,7 +7,7 @@ public interface AlgInterface {
 
 	public int getAlg(AlgGeneral algGeneral);
 	public int getAlg(PlayerGeneral playerGeneral, AlgGeneral algGeneral);
-	
+
 	public int getTotal();
 	public void setTotal();
 	public void setTotal(int total);
@@ -16,6 +16,6 @@ public interface AlgInterface {
 	public void setWeight(int weight);
 
 	public ArrayList<Integer> getHistory();
-    public ArrayList<Integer> getWinHistory();
+	public ArrayList<Integer> getWinHistory();
 
 }
