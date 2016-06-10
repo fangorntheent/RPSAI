@@ -219,7 +219,7 @@ public class PlayRPS {
         String input;
         int parseResult;
 
-        while (true) {
+        /*while (true) {
             if (algGeneral.matchNumber == 0)
                 System.out.println("To see options, press 'h', or type 'help'." + "\n");
             System.out.println("Round: " + algGeneral.matchNumber);
@@ -236,19 +236,22 @@ public class PlayRPS {
                 addWinHistory(algList);
                 algGeneral.matchNumber++;
             }
-        }
+        }*/
 
-        /* For simulated playing for testing purposes
-        for (int i = 0; i < 10; i++) {
+        //For simulated playing for testing purposes
+        for (int i = 0; i < 50; i++) {
             playerGeneral.history.add(new Random().nextInt(3));
             setWeight(algList);
             algGeneral.chosenAlgNumber = combineAlgs(algList);
-            runChosenAlg(algList);
+            addChosenAlg(algList);
             addWinHistory(algList);
+            System.out.println("Round: " + algGeneral.matchNumber);
             printWinner((Integer)(playerGeneral.history.get(playerGeneral.history.size() - 1)), (Integer)(algGeneral.history.get(algGeneral.history.size() - 1)));
-            matchNumber++;
+            algGeneral.matchNumber++;
         }
-        */
+        System.out.println('\n' + "Total rounds: " + algGeneral.matchNumber);
+        parseInput("scores");
+
     }
 
 }
