@@ -223,4 +223,3 @@ public class AlgFour implements AlgInterface {
         weight = value * repeat;
     }
 }
-
