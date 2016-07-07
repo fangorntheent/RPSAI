@@ -170,7 +170,7 @@ public class AlgFive implements AlgInterface {
     public int getAlg(PlayerGeneral playerGeneral, AlgGeneral algGeneral) {
 
         // Needs extra time to kick in but must maintain same standards
-        if (algGeneral.matchNumber < 4)
+        /*if (algGeneral.matchNumber < 4)
             return getAlg(algGeneral);
 
         int r = 0;
@@ -207,7 +207,10 @@ public class AlgFive implements AlgInterface {
 
         algGeneral.algResults.set(algNumber, winningPlay.winningPlay);
         history.add(winningPlay.winningPlay);
-        return (Integer)(history.get(history.size() - 1));
+        return (Integer)(history.get(history.size() - 1));*/
+        int random = new Random().nextInt(3);
+        history.add(random);
+        return random;
     }
 
     // Returns total
